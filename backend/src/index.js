@@ -12,6 +12,7 @@ import { connectDB } from "./lib/db.js";
 import job from "./lib/cron.js";
 
 import clerkWebhook from "./webhooks/clerk.webhook.js";
+import authRoutes from "./routes/auth.route.js";
 
 const app = express();
 
@@ -34,6 +35,8 @@ app.use(clerkMiddleware());
 app.get("/health", (req, res) => {
   res.status(200).json({ ok: true });
 });
+
+app.use("/api/auth", authRoutes);
 
 // Serve static files from the public directory
 // this is for the production build, not for the development
